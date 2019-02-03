@@ -2,13 +2,14 @@
 
 import math
 import statistics
+from sensor import calculate_angle
 
 
 
 
 """ need to find out how to get the correct data set"""
 ### takes in a farm object the sensor it wants to use and then the day
-def score(farm, data ):
+def score(farm, data, sensor):
     pressurelist=[]
     for sens in farm.sensors:
         pressurelist.append(sens.past[0].pressure)
@@ -31,14 +32,19 @@ def score(farm, data ):
     rainAM = data.rain
     rain_VAL = norm(rainAM, 150)
 
+    deltaA = angle - data.wind_dir
+    if deltaA < 0:
+        deltaA = abs(deltaA)
+    if deltaA > 180:
+        deltaA = 360 - deltaA
 
-    score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL
+    deltaA_VAL = norm(deltaA, 180)
+
+    score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL+deltaA_VAL
 
     return(score)
 
-
-
-import math
+def successText()
 
 def calc_dT(temp, humidity, pressure):
     #celsius, percentage, millibar
@@ -82,10 +88,10 @@ def norm(val, max):
 def ranker(farm, sensor):
     scorelistOG = []
 
-    scorelistOG.append(score(farm.sensor.point))
+    scorelistOG.append(score(sensor.point, sensor))
 
     for datapoint in farm.future_forecast:
-        scorelistOG.append(score(datapoint))
+        scorelistOG.append(score(datapoint, sensor))
 
     timecounter = .00
     scorelist = []
