@@ -95,3 +95,9 @@ def ranker(farm, sensor):
         scorelist.append(val)
         timecounter+=.05/8
     return(scorelist)
+
+
+def maxfinder(scorelist):
+    max = max(list)
+    distance = list.index(max)
+    return(distance)
