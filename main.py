@@ -4,6 +4,7 @@ import weather
 from weather import DataPoint
 from sensor import Sensor
 from farm import Farm
+from score import score
 
 def main():
     dp0 = weather.get_weather(15.0, 12.0)
@@ -18,11 +19,16 @@ def main():
     s1.update(dp1)
     s1.update(dp2)
 
+    s2 = Sensor((20.0,50.0))
+    s2.update(dp1)
+    s2.update(dp2)
+
     s1.add_water((47.0,88.0))
     print(s1.water_angles)
 
     f1 = Farm((0.0,90.0))
     f1.add_sensor(s1)
+    f1.add_sensor(s2)
 
     score(f1, 0, s1.past[0])
 
