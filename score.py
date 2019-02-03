@@ -46,11 +46,72 @@ def score(farm, data, sensor):
 
     deltaA_VAL = norm(deltaA, 180)
 
-    score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL+deltaA_VAL
+    score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL-deltaA_VAL
 
     return(score)
 
-def responsetext(datapoint, sensor, idx):
+def responsetext(data, sensor, idx, bool, farm, daytext):
+    scorelist = []
+    pressurelist=[]
+    for sens in farm.sensors:
+        pressurelist.append(sens.point.pressure)
+
+    deltaT = calc_dT(data.temp, data.humidity, data.pressure)
+    DT_VAL = norm(deltaT, 15)
+    scorelist.append(DT_VAL)
+
+    tempMAG = abs(16.666-data.temp)
+    TEMP_VAL = norm(tempMAG, 20)
+    scorelist.append(TEMP_VAL)
+
+    pSTD_VAL = 0
+    if len(pressurelist) > 1:
+        pSTD = statistics.stdev(pressurelist)
+        pSTD_VAL = norm(pSTD, 50)
+
+    windMAG   = abs(2.7- data.wind_speed)
+    wing_VAL = norm(windMAG, 10)
+    scorelist.append(wing_VAL)
+
+    cloudMAG = abs(.5-data.clouds)
+    cloud_VAL = norm(cloudMAG, .5)
+    scorelist.append(cloud_VAL)
+
+    rainAM = data.rain
+    rain_VAL = norm(rainAM, 150)
+    scorelist.append(rain_VAL)
+
+    deltaA_VAL = 0
+    angle = sensor.water_angle
+    deltaA = angle - data.wind_dir
+    if deltaA < 0:
+        deltaA = abs(deltaA)
+    if deltaA > 180:
+        deltaA = 360 - deltaA
+
+    deltaA_VAL = norm(deltaA, 180)
+    scorelist.append(deltaA_VAL)
+
+    score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL-deltaA_VAL
+
+    avg = score/6
+    arraycount = 0
+
+
+
+
+
+    responsetext = " We should spray today becuase "
+    if bool:
+
+        for val in scorelist:
+            if val> avg:
+
+
+
+
+    return(score)
+
 
 
 
