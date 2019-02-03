@@ -25,21 +25,25 @@ class Sensor:
 
 
 #Questionable function I found online to calculate the angle between coordinates
-def calculate_angle(one, two):
-    lat1 = one[0]
-    long1 = one[1]
-    lat2 = two[0]
-    long2 = two[1]
 
-    dLon = (long2 - long1)
+def calculate_angle(pointA, pointB):
 
-    y = math.sin(dLon) * math.cos(lat2)
-    x = math.cos(lat1) * math.sin(lat2) - math.sin(lat1) * math.cos(lat2) * math.cos(dLon)
+    if (type(pointA) != tuple) or (type(pointB) != tuple):
+        raise TypeError("Only tuples are supported as arguments")
 
-    brng = math.atan2(y, x)
+    lat1 = math.radians(pointA[0])
+    lat2 = math.radians(pointB[0])
 
-    brng = math.degrees(brng)
-    brng = (brng + 360) % 360
-    brng = 360 - brng # count degrees clockwise - remove to make counter-clockwise
+    diffLong = math.radians(pointB[1] - pointA[1])
 
-    return brng
+    x = math.sin(diffLong) * math.cos(lat2)
+    y = math.cos(lat1) * math.sin(lat2) - (math.sin(lat1)
+            * math.cos(lat2) * math.cos(diffLong))
+
+    initial_bearing = math.atan2(x, y)
+    # Now we have the initial bearing but math.atan2 return values
+    # from -180° to + 180° which is not what we want for a compass bearing
+    # The solution is to normalize the initial bearing as shown below
+    initial_bearing = math.degrees(initial_bearing)
+    compass_bearing = (initial_bearing + 360) % 360
+    return compass_bearing
