@@ -7,8 +7,8 @@ from weather import DataPoint
 import random
 
 class Sensor:
-    past = [None]*5
     water_angles = []
+    point = None
 
     def __init__(self, coords):
         self.coords = coords
