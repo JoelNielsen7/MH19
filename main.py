@@ -16,15 +16,8 @@ def main():
     s1.add_water((47.0,88.0))
     print(s1.water_angles)
 
-<<<<<<< HEAD
     f1 = Farm((0.0,90.0))
     f1.add_sensor(s1)
 
 if __name__ == "__main__":
     main()
-=======
-f1 = Farm((0.0,90.0))
-f1.add_sensor(s1)
-
-print(score(f1, 0, dp2))
->>>>>>> b5764448181c19da0fb9e7f83652d85ccf96b2ef
