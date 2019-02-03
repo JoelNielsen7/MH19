@@ -23,6 +23,8 @@ class Sensor:
         angle = calculate_angle(self.coords, water_coords)
         self.water_angles.append(angle)
 
+
+#Questionable function I found online to calculate the angle between coordinates
 def calculate_angle(one, two):
     lat1 = one[0]
     long1 = one[1]
