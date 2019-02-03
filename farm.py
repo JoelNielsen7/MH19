@@ -8,6 +8,7 @@ from sensor import Sensor
 
 class Farm:
     sensors = []
+    water_coords = []
     global_past = []
     future_forecast = []
 
@@ -19,6 +20,10 @@ class Farm:
 #add a sensor to the list
     def add_sensor(self, sensor):
         self.sensors.append(sensor)
+
+#add body of water point for wind direction
+    def add_water(self, coords):
+        self.water_coords.append(coords)
 
 #pull a group of current and forecasted data and add them to the lists
     def pull_global(self):

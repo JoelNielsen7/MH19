@@ -16,5 +16,5 @@ Assignments:
 Joel: LORA, hardware demonstration
 Callen: decision making
 Jacquise: website gang
-Alex:
+Alex: weather API, data
 Dominic: website gang
