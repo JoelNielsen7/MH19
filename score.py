@@ -74,8 +74,8 @@ def aggregateScore(farm, data, sensor):
 def responsetext(scorelist):
     avg = sum(scorelist) / 6
 
-    parray = ["\n The temperature is took to keep particles together","\n The wind will help move the pesticide but not blow it away","\n The evaporation rate will increase the effectivenss of your spray ","\n There are few drafts and gusts","\n there is no rain forecasted", "\n The pesticide will not blow into any water"]
-    narray = ["\n the temprature is to high","\n It is very windy", "\n"+"The evaporation rate is high","\n The pressure diffrence is high","\n it is a bit rainy","\n The wind is pointing towards a close body of water"]
+    parray = ["\n the temperature is took to keep particles together","\n the wind will help move the pesticide but not blow it away","\n the evaporation rate will increase the effectivenss of your spray ","\n there are few drafts and gusts","\n there is no rain forecasted", "\n the pesticide will not blow into any water"]
+    narray = ["\n the temprature is too high","\n it is very windy", "\n"+"the evaporation rate is high","\n the pressure difference is high","\n it is a bit rainy","\n the wind is pointing towards a close body of water"]
     if bool:
         responsetext = "We recommend spraying because"
         neg = "\n Maybe hold off becuase"
