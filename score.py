@@ -92,6 +92,6 @@ def ranker(farm, sensor):
     for score in scorelistOG:
         cor = score * timecounter
         val = score - cor
-        scorelist.append.(val)
+        scorelist.append(val)
         timecounter+=.05/8
     return(scorelist)
