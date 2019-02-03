@@ -29,3 +29,25 @@ class Farm:
 #pull a group of current and forecasted data and add them to the lists
     def pull_global(self):
         x=1
+
+#Returns a list of forecasted datapoints for a given lat/long
+def get_forecast(lat, lon):
+    request_str = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + str(lat) + '&lon=' + str(lon) + '&units=metric&APPID=7affa084c276e60ac6eaa71ec2e60737'
+    result = requests.get(request_str).json()
+    if result['cod'] != '200':
+        print('bad response code')
+        return []
+
+    datapoint_list = []
+    for entry in result['list']:
+        time = int(entry['dt'])
+        temp = float(entry['main']['temp'])
+        pressure = float(entry['main']['pressure'])
+        humidity = int(entry['main']['humidity']) / 100
+        wind_speed = float(entry['wind']['speed'])
+        wind_dir = int(entry['wind']['deg'])
+        clouds = int(entry['clouds']['all']) / 100
+
+        datapoint_list.append(DataPoint(time, temp, pressure, humidity, wind_speed, wind_dir, clouds))
+
+    return datapoint_list

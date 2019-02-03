@@ -14,6 +14,5 @@ s1.update(dp2)
 s1.add_water([90,90])
 print(s1.water_angles)
 
-
 f1 = Farm([0,90])
 f1.add_sensor(s1)
