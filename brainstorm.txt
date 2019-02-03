@@ -1,0 +1,20 @@
+Plan Document:
+
+Tasks:
+1. Get the data
+    Wind, temp, evaporation
+
+2. Make decision
+    Possible ML tool,
+
+3. Present
+    Webiste... using map, possible gradient for whether or not a part of the field should be sprayed
+    Also fake LORA message.
+
+
+Assignments:
+Joel: LORA, hardware demonstration
+Callen: decision making
+Jacquise: website gang
+Alex:
+Dominic: website gang
