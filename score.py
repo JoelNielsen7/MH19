@@ -77,3 +77,21 @@ def norm(val, max):
         normal = val/max
 
     return(normal)
+
+
+def ranker(farm, sensor):
+    scorelistOG = []
+
+    scorelistOG.append(score(farm.sensor.point))
+
+    for datapoint in farm.future_forecast:
+        scorelistOG.append(score(datapoint))
+
+    timecounter = .00
+    scorelist = []
+    for score in scorelistOG:
+        cor = score * timecounter
+        val = score - cor
+        scorelist.append.(val)
+        timecounter+=.05/8
+    return(scorelist)
