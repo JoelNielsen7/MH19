@@ -52,7 +52,7 @@ spraying pesticides on a certain day.
   pesticide application.
 
 How to run?
-Pesto-mode can be run through main.py. (ADD MORE HERE)
+Pesto-mode can be run through main.py.
 
 Sources:
 https://grdc.com.au/__data/assets/pdf_file/0024/248181/GRDC-Weather-Essentials-for-Pesticide-Application-2017.pdf
