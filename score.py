@@ -9,15 +9,10 @@ import statics
 """ need to find out how to get the correct data set"""
 ### takes in a farm object the sensor it wants to use and then the day
 def score(farm, sensor_number, data ):
-    if day==0:
-        data = farm.sensors[sensor_number].past[0]
-    else:
-        data = Farm.future_forecast[day]
-    pressurelist = []
     for sens in farm.sensors:
         pressurelist.append(sens.past[0].pressure)
 
-    deltaT = deltaT()
+    deltaT = calc_dT(data.temp, data.humidity, data.pressure)
     DT_VAL = norm(deltaT, 15)
 
     tempMAG = abs(16.666-data.temp)
@@ -31,6 +26,12 @@ def score(farm, sensor_number, data ):
 
     cloudMAG = abs(.5-data.clouds)
     cloud_VAL = norm(cloudMAG, .5)
+
+    score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL
+
+    return(score)
+
+
 
 import math
 
