@@ -19,10 +19,10 @@ def score(farm, sensor_number, data ):
     tempMAG = abs(16.666-data.temp)
     TEMP_VAL = norm(tempMAG, 20)
 
-    pSTD = stdev(pressurelist)
+    pSTD = statistics.stdev(pressurelist)
     pSTD_VAL = norm(pSTD, 50)
 
-    windMAG   = abs(2.7- data.wid_speed)
+    windMAG   = abs(2.7- data.wind_speed)
     wing_VAL = norm(windMAG, 10)
 
     cloudMAG = abs(.5-data.clouds)
@@ -30,6 +30,7 @@ def score(farm, sensor_number, data ):
 
     score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL
 
+    print("Score: ", score)
     return(score)
 
 
