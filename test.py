@@ -19,18 +19,25 @@ def main():
     testfarm.pull_current()
     testfarm.pull_forecast()
 
-    print(testfarm.future_forecast)
+    print("\n\n\nRandomized Example Sensor Data")
+    print("------------------------------")
 
-    #prints out some random weather data from sensors
-    """
     i = 0
     while i < len(testfarm.sensors):
+        print("sensor " + str(i + 1))
         print(testfarm.sensors[i].point)
         i += 1
-    """
 
-    returnlist = score.ranker(testfarm, testfarm.sensors[1])
+    print("\n\n\nExample Aggregate Scores")
+    print("------------------------")
 
-    print(returnlist)
+    box = score.score(testfarm, senone.point, senone)
+
+    list = []
+    for datapoints in testfarm.future_forecast:
+        box = score.aggregateScore(testfarm, datapoints, senone)
+        list.append(box)
+
+    print(list)
 
 main()
