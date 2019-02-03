@@ -3,7 +3,7 @@ a list of 5 DataPoint objects that represent the most recent 5 points collected
 by the sensor
 """
 import math
-from datapoint import DataPoint
+from weather import DataPoint
 
 class Sensor:
     past = [None]*5
