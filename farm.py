@@ -44,3 +44,9 @@ class Farm:
 #fills future_forecast with forecasted weather
     def pull_forecast(self):
         self.future_forecast = weather.get_forecast(self.coords[0], self.coords[1])
+
+    def get_time(self, idx):
+        if idx == 0:
+            return 0
+        else:
+            return self.future_forecast[idx - 1].time - today.time / (8.64 * (10 ** 7))

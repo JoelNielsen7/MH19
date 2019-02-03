@@ -9,7 +9,7 @@ import random
 
 class Sensor:
     coords = ()
-    water_angles = []
+    water_angle = None
     point = None
 
     def __init__(self, coords):
@@ -42,7 +42,7 @@ class Sensor:
 
     def add_water(self, water_coords):
         angle = calculate_angle(self.coords, water_coords)
-        self.water_angles.append(angle)
+        self.water_angle = angle
 
 
 #Questionable function I found online to calculate the angle between coordinates
