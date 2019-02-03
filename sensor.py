@@ -13,9 +13,12 @@ class Sensor:
     def __init__(self, coords):
         self.coords = coords
 
-    def update_data(self, data):
-        point = get_weather(lat, lon)
+    def get_current(self):
+        #in the real world, this would be live data from the sensor, not weather
+        self.point = weather.get_weather
 
+    def randomize(self):
+        #randomizes for sake of testing
         #consider higher variation value (currently +-5%)
         rand = point.temp * random.rand(-.05,.05)
         point.temp += rand
