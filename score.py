@@ -8,7 +8,7 @@ import statistics
 
 """ need to find out how to get the correct data set"""
 ### takes in a farm object the sensor it wants to use and then the day
-def score(farm, sensor_number, data ):
+def score(farm, data ):
     pressurelist=[]
     for sens in farm.sensors:
         pressurelist.append(sens.past[0].pressure)
@@ -19,18 +19,21 @@ def score(farm, sensor_number, data ):
     tempMAG = abs(16.666-data.temp)
     TEMP_VAL = norm(tempMAG, 20)
 
-    pSTD = statistics.stdev(pressurelist)
+    pSTD = stdev(pressurelist)
     pSTD_VAL = norm(pSTD, 50)
 
-    windMAG   = abs(2.7- data.wind_speed)
+    windMAG   = abs(2.7- data.wid_speed)
     wing_VAL = norm(windMAG, 10)
 
     cloudMAG = abs(.5-data.clouds)
     cloud_VAL = norm(cloudMAG, .5)
 
+    rainAM = data.rain
+    rain_VAL = norm(rainAM, 150)
+
+
     score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL
 
-    print("Score: ", score)
     return(score)
 
 
@@ -62,10 +65,6 @@ def calc_dT(temp, humidity, pressure):
 
     dT = temp - wetGuess
     return dT
-
-
-    rainAM = data.rain
-    rain_VAL = norm(rainAM, 150)
 
 
 
