@@ -50,7 +50,7 @@ def score(farm, data, sensor):
 
     return(score)
 
-def responsetext(data, sensor, idx, bool, farm, daytext):
+def responsetext(data, sensor,bool, farm):
     scorelist = []
     pressurelist=[]
     for sens in farm.sensors:
@@ -68,6 +68,7 @@ def responsetext(data, sensor, idx, bool, farm, daytext):
     if len(pressurelist) > 1:
         pSTD = statistics.stdev(pressurelist)
         pSTD_VAL = norm(pSTD, 50)
+    scorelist.append(pSTD_VAL)
 
     windMAG   = abs(2.7- data.wind_speed)
     wing_VAL = norm(windMAG, 10)
@@ -89,28 +90,37 @@ def responsetext(data, sensor, idx, bool, farm, daytext):
     if deltaA > 180:
         deltaA = 360 - deltaA
 
-    deltaA_VAL = norm(deltaA, 180)
+    deltaA= norm(deltaA, 180)
+    deltaA_VAL = 1 - deltaA
     scorelist.append(deltaA_VAL)
 
-    score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL-deltaA_VAL
+    score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL+deltaA_VAL+rain_VAL
 
     avg = score/6
+
     arraycount = 0
 
+    narray = ["evaporation rate is nice ","temp is nice","pressure is nice","wind is looking good","nice cloud mix","not to rainy","wind is not pointing towards water"]
+    parray = ["asdf","asdf","asdf","asdf","asdf","asdf",]
 
-
-
-
-    responsetext = " We should spray today becuase "
     if bool:
+        responsetext = " here "
+
+        for val in scorelist:
+            if val<avg:
+                responsetext+= narray[arraycount]
+            arraycount+=1
+    else:
+        responsetext = " We should spray today becuase "
 
         for val in scorelist:
             if val> avg:
+                responsetext+= narray[arraycount]
+        arraycount+=1
 
 
 
-
-    return(score)
+    return(responsetext)
 
 
 
