@@ -15,7 +15,7 @@ class Farm:
 
 #add a sensor to the list
     def add_sensor(self, sensor):
-        sensors.add(sensor)
+        self.sensors.add(sensor)
 
-#pull a group of 
+#pull a group of
     def pull_global(self):
