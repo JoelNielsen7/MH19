@@ -2,9 +2,12 @@
 or from the weather data pulled from online
 """
 class DataPoint:
-    def __init__(self, temp, wind, uv, rain, delta_t):
+    def __init__(self, temp, wind, wind_dir, uv, rain, delta_t):
         self.temp = temp
         self.wind = wind
+        self.wind_dir = windir
         self.uv = uv
         self.rain = rain
         self.delta_t = delta_t
+
+    
