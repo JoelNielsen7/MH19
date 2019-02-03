@@ -48,8 +48,9 @@ def get_forecast(lat, lon):
         wind_speed = float(entry['wind']['speed'])
         wind_dir = int(entry['wind']['deg'])
         clouds = int(entry['clouds']['all']) / 100
+        rain = int(entry['rain']['3h'])
 
-        datapoint_list.append(DataPoint(time, temp, pressure, humidity, wind_speed, wind_dir, clouds))
+        datapoint_list.append(DataPoint(time, temp, pressure, humidity, wind_speed, wind_dir, clouds, rain))
 
     return datapoint_list
 
@@ -68,6 +69,7 @@ def get_weather(lat, lon):
     wind_speed = float(result['wind']['speed'])
     wind_dir = int(result['wind']['deg'])
     clouds = int(result['clouds']['all']) / 100
+    rain = int(entry['rain']['3h'])
 
-    return DataPoint(time, temp, pressure, humidity, wind_speed, wind_dir, clouds)
+    return DataPoint(time, temp, pressure, humidity, wind_speed, wind_dir, clouds, rain)
 
