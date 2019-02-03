@@ -36,14 +36,17 @@ def score(farm, data, sensor):
 
     deltaA_VAL = 0
 
+    deltaA = 0
+    if sensor.water_angle != None:
+        angle = sensor.water_angle
+        deltaA = angle - data.wind_dir
+        if deltaA < 0:
+            deltaA = abs(deltaA)
+        if deltaA > 180:
+            deltaA = 360 - deltaA
 
-    angle = sensor.water_angle
-    deltaA = angle - data.wind_dir
-    if deltaA < 0:
-        deltaA = abs(deltaA)
-    if deltaA > 180:
-        deltaA = 360 - deltaA
-
+    deltaA= norm(deltaA, 180)
+    deltaA_VAL = 1 - deltaA
     deltaA_VAL = norm(deltaA, 180)
 
     score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL-deltaA_VAL
@@ -82,13 +85,14 @@ def responsetext(data, sensor,bool, farm):
     rain_VAL = norm(rainAM, 150)
     scorelist.append(rain_VAL)
 
-    deltaA_VAL = 0
-    angle = sensor.water_angle
-    deltaA = angle - data.wind_dir
-    if deltaA < 0:
-        deltaA = abs(deltaA)
-    if deltaA > 180:
-        deltaA = 360 - deltaA
+    deltaA = 0
+    if sensor.water_angle != None:
+        angle = sensor.water_angle
+        deltaA = angle - data.wind_dir
+        if deltaA < 0:
+            deltaA = abs(deltaA)
+        if deltaA > 180:
+            deltaA = 360 - deltaA
 
     deltaA= norm(deltaA, 180)
     deltaA_VAL = 1 - deltaA
