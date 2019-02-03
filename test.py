@@ -1,36 +1,26 @@
 """Program used to test the implementation of our classes"""
 
-import weather
-from weather import DataPoint
-from sensor import Sensor
+import farm
 from farm import Farm
-from score import score
+import sensor
+from sensor import Sensor
 
 def main():
-    dp0 = weather.get_weather(15.0, 12.0)
-    print(dp0)
-    fc = weather.get_forecast(66.0, 14.0)
-    print(fc[0])
+    testfarm = Farm((0,0))
+    senone = Sensor((44.790300, -92.931998))
+    sentwo = Sensor((44.790300, -92.931998))
+    senthree = Sensor((44.790300, -92.931998))
 
-    dp1 = DataPoint(19, 2, 90, 1.5, .4, 6,5)
-    dp2 = DataPoint(25, 10, 257, 2.4, .1, 9,5)
+    testfarm.add_sensor(senone)
+    testfarm.add_sensor(sentwo)
+    testfarm.add_sensor(senthree)
 
-    s1 = Sensor((20.0,50.0))
-    s1.update(dp1)
-    s1.update(dp2)
+    testfarm.pull_current()
 
-    s2 = Sensor((20.0,50.0))
-    s2.update(dp1)
-    s2.update(dp2)
+    #prints out some random weather data from sensors
+    i = 0
+    while i < len(testfarm.sensors):
+        print(testfarm.sensors[i].point)
+        i += 1
 
-    s1.add_water((47.0,88.0))
-    print(s1.water_angles)
-
-    f1 = Farm((0.0,90.0))
-    f1.add_sensor(s1)
-    f1.add_sensor(s2)
-
-    score(f1, 0, s1.past[0])
-
-if __name__ == "__main__":
-    main()
+main()

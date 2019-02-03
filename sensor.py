@@ -22,19 +22,22 @@ class Sensor:
     def randomize(self):
         #randomizes for sake of testing
         #consider higher variation value (currently +-5%)
-        rand = self.point.temp * random.uniform(-.05,.05)
+
+        variation = .05
+
+        rand = self.point.temp * random.uniform(-variation,variation)
         self.point.temp += rand
-        rand = self.point.pressure * random.uniform(-.05,.05)
+        rand = self.point.pressure * random.uniform(-variation,variation)
         self.point.pressure += rand
-        rand = self.point.humidity * random.uniform(-.05,.05)
+        rand = self.point.humidity * random.uniform(-variation,variation)
         self.point.humidity += rand
-        rand = self.point.wind_speed * random.uniform(-.05,.05)
+        rand = self.point.wind_speed * random.uniform(-variation,variation)
         self.point.wind_speed += rand
-        rand = self.point.wind_dir * random.uniform(-.05,.05)
+        rand = self.point.wind_dir * random.uniform(-variation,variation)
         self.point.wind_dir += rand
-        rand = self.point.clouds * random.uniform(-.05,.05)
+        rand = self.point.clouds * random.uniform(-variation,variation)
         self.point.clouds += rand
-        rand = self.point.rain * random.uniform(-.05,.05)
+        rand = self.point.rain * random.uniform(-variation,variation)
         self.point.rain += rand
 
     def add_water(self, water_coords):
