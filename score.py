@@ -9,6 +9,7 @@ import statistics
 """ need to find out how to get the correct data set"""
 ### takes in a farm object the sensor it wants to use and then the day
 def score(farm, sensor_number, data ):
+    pressurelist=[]
     for sens in farm.sensors:
         pressurelist.append(sens.past[0].pressure)
 

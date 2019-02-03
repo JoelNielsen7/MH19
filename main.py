@@ -6,8 +6,8 @@ from farm import Farm
 from score import score
 
 def main():
-    dp1 = DataPoint(19, 2, 90, 1.5, .4, 6,5)
-    dp2 = DataPoint(25, 10, 257, 2.4, .1, 9,5)
+    dp1 = DataPoint(19, 2, 90, 1.5, .4, 6,5,4)
+    dp2 = DataPoint(25, 10, 257, 2.4, .1, 9,5,4)
 
     s1 = Sensor((20.0,50.0))
     s1.update(dp1)
@@ -18,6 +18,8 @@ def main():
 
     f1 = Farm((0.0,90.0))
     f1.add_sensor(s1)
+
+    score(f1, 0, s1.past[0])
 
 if __name__ == "__main__":
     main()
