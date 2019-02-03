@@ -4,6 +4,7 @@ by the sensor
 """
 import math
 from weather import DataPoint
+import random
 
 class Sensor:
     past = [None]*5
@@ -12,12 +13,24 @@ class Sensor:
     def __init__(self, coords):
         self.coords = coords
 
-    def update(self, point):
-        self.past[4] = self.past[3]
-        self.past[3] = self.past[2]
-        self.past[2] = self.past[1]
-        self.past[1] = self.past[0]
-        self.past[0] = point
+    def update_data(self, data):
+        point = get_weather(lat, lon)
+
+        #consider higher variation value (currently +-5%)
+        rand = point.temp * random.rand(-.05,.05)
+        point.temp += rand
+        rand = point.pressure * random.rand(-.05,.05)
+        point.pressure += rand
+        rand = point.humidity * random.rand(-.05,.05)
+        point.humidity += rand
+        rand = point.wind_speed * random.rand(-.05,.05)
+        point.wind_speed += rand
+        rand = point.wind_dir * random.rand(-.05,.05)
+        point.wind_dir += rand
+        rand = point.clouds * random.rand(-.05,.05)
+        point.clouds += rand
+        rand = point.rain * random.rand(-.05,.05)
+        point.rain += rand
 
     def add_water(self, water_coords):
         angle = calculate_angle(self.coords, water_coords)
