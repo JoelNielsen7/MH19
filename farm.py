@@ -10,6 +10,7 @@ class Farm:
     sensors = []
     water_coords = []
     global_past = []
+    today = None
     future_forecast = []
 
 
