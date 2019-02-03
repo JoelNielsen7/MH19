@@ -51,7 +51,7 @@ def score(farm, data, sensor):
     deltaA_VAL = norm(deltaA, 180)
 
     #values between 0-1
-    subscores = (TEMP_VAL, wind_VAL, DT_VAL, pSTD_VAL, rain_VAL, deltaA_VAL)
+    subscores = [TEMP_VAL, wind_VAL, DT_VAL, pSTD_VAL, rain_VAL, deltaA_VAL]
     return subscores
 
 def aggregateScore(farm, data, sensor):
