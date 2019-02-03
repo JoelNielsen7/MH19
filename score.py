@@ -1,7 +1,7 @@
 """ this will hopefully score the gang"""
 
 import math
-import statics
+import statistics
 
 
 
