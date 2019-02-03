@@ -176,7 +176,7 @@ def ranker(farm, sensor):
     for datapoint in farm.future_forecast:
         scorelistOG.append(score(farm, datapoint, sensor))
 
-    print(scorelistOG)
+    #print(scorelistOG)
 
     timecounter = .00
     scorelist = []
