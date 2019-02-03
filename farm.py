@@ -43,4 +43,4 @@ class Farm:
 
 #fills future_forecast with forecasted weather
     def pull_forecast(self):
-        future_forecast = weather.get_forecast
+        self.future_forecast = weather.get_forecast(self.coords[0], self.coords[1])

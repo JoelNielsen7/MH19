@@ -4,6 +4,7 @@ import farm
 from farm import Farm
 import sensor
 from sensor import Sensor
+import score
 
 def main():
     testfarm = Farm((0,0))
@@ -16,11 +17,20 @@ def main():
     testfarm.add_sensor(senthree)
 
     testfarm.pull_current()
+    testfarm.pull_forecast()
+
+    print(testfarm.future_forecast)
 
     #prints out some random weather data from sensors
+    """
     i = 0
     while i < len(testfarm.sensors):
         print(testfarm.sensors[i].point)
         i += 1
+    """
+
+    returnlist = score.ranker(testfarm, testfarm.sensors[1])
+
+    print(returnlist)
 
 main()

@@ -10,9 +10,9 @@ from sensor import calculate_angle
 """ need to find out how to get the correct data set"""
 ### takes in a farm object the sensor it wants to use and then the day
 def score(farm, data, sensor):
-    pressurelist=[]
-    for sens in farm.sensors:
-        pressurelist.append(sens.past[0].pressure)
+    #pressurelist=[]
+    #for sens in farm.sensors:
+    #    pressurelist.append(sens.past[0].pressure)
 
     deltaT = calc_dT(data.temp, data.humidity, data.pressure)
     DT_VAL = norm(deltaT, 15)
@@ -20,10 +20,10 @@ def score(farm, data, sensor):
     tempMAG = abs(16.666-data.temp)
     TEMP_VAL = norm(tempMAG, 20)
 
-    pSTD = stdev(pressurelist)
-    pSTD_VAL = norm(pSTD, 50)
+    #pSTD = statistics.stdev(pressurelist)
+    #pSTD_VAL = norm(pSTD, 50)
 
-    windMAG   = abs(2.7- data.wid_speed)
+    windMAG   = abs(2.7- data.wind_speed)
     wing_VAL = norm(windMAG, 10)
 
     cloudMAG = abs(.5-data.clouds)
@@ -32,6 +32,10 @@ def score(farm, data, sensor):
     rainAM = data.rain
     rain_VAL = norm(rainAM, 150)
 
+    deltaA_VAL = 0
+    pSTD_VAL = 0
+    """
+    angle = sensor.water_angles[0] #TODO
     deltaA = angle - data.wind_dir
     if deltaA < 0:
         deltaA = abs(deltaA)
@@ -39,12 +43,10 @@ def score(farm, data, sensor):
         deltaA = 360 - deltaA
 
     deltaA_VAL = norm(deltaA, 180)
-
+    """
     score = cloud_VAL+wing_VAL+DT_VAL+pSTD_VAL+TEMP_VAL+deltaA_VAL
 
     return(score)
-
-def successText()
 
 def calc_dT(temp, humidity, pressure):
     #celsius, percentage, millibar
@@ -88,16 +90,18 @@ def norm(val, max):
 def ranker(farm, sensor):
     scorelistOG = []
 
-    scorelistOG.append(score(sensor.point, sensor))
+    scorelistOG.append(score(farm, sensor.point, sensor))
 
     for datapoint in farm.future_forecast:
-        scorelistOG.append(score(datapoint, sensor))
+        scorelistOG.append(score(farm, datapoint, sensor))
 
+    print(scorelistOG)
+    
     timecounter = .00
     scorelist = []
-    for score in scorelistOG:
-        cor = score * timecounter
-        val = score - cor
+    for x in scorelistOG:
+        cor = x * timecounter
+        val = x - cor
         scorelist.append(val)
         timecounter+=.05/8
     return(scorelist)

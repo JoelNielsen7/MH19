@@ -44,6 +44,7 @@ def get_weather(lat, lon):
 def get_forecast(lat, lon):
     request_str = 'http://api.openweathermap.org/data/2.5/forecast?lat=' + str(lat) + '&lon=' + str(lon) + '&units=metric&APPID=7affa084c276e60ac6eaa71ec2e60737'
     result = requests.get(request_str).json()
+
     if str(result['cod']) != '200':
         print('bad response code: ' + result['cod'])
         return []
@@ -57,10 +58,10 @@ def get_forecast(lat, lon):
         wind_speed = float(entry['wind']['speed'])
         wind_dir = int(entry['wind']['deg'])
         clouds = int(entry['clouds']['all']) / 100
+        rain = 0;
         if 'rain' in entry:
-            rain = int(entry['rain']['3h'])
-        else:
-            rain = 0;
+            if '3h' in entry['rain']:
+                rain = int(entry['rain']['3h'])
 
         datapoint_list.append(DataPoint(time, temp, pressure, humidity, wind_speed, wind_dir, clouds, rain))
 
