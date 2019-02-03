@@ -3,10 +3,12 @@ a list of 5 DataPoint objects that represent the most recent 5 points collected
 by the sensor
 """
 import math
+import weather
 from weather import DataPoint
 import random
 
 class Sensor:
+    coords = ()
     water_angles = []
     point = None
 
@@ -15,25 +17,25 @@ class Sensor:
 
     def get_current(self):
         #in the real world, this would be live data from the sensor, not weather
-        self.point = weather.get_weather
+        self.point = weather.get_weather(self.coords[0], self.coords[1])
 
     def randomize(self):
         #randomizes for sake of testing
         #consider higher variation value (currently +-5%)
-        rand = point.temp * random.rand(-.05,.05)
-        point.temp += rand
-        rand = point.pressure * random.rand(-.05,.05)
-        point.pressure += rand
-        rand = point.humidity * random.rand(-.05,.05)
-        point.humidity += rand
-        rand = point.wind_speed * random.rand(-.05,.05)
-        point.wind_speed += rand
-        rand = point.wind_dir * random.rand(-.05,.05)
-        point.wind_dir += rand
-        rand = point.clouds * random.rand(-.05,.05)
-        point.clouds += rand
-        rand = point.rain * random.rand(-.05,.05)
-        point.rain += rand
+        rand = self.point.temp * random.uniform(-.05,.05)
+        self.point.temp += rand
+        rand = self.point.pressure * random.uniform(-.05,.05)
+        self.point.pressure += rand
+        rand = self.point.humidity * random.uniform(-.05,.05)
+        self.point.humidity += rand
+        rand = self.point.wind_speed * random.uniform(-.05,.05)
+        self.point.wind_speed += rand
+        rand = self.point.wind_dir * random.uniform(-.05,.05)
+        self.point.wind_dir += rand
+        rand = self.point.clouds * random.uniform(-.05,.05)
+        self.point.clouds += rand
+        rand = self.point.rain * random.uniform(-.05,.05)
+        self.point.rain += rand
 
     def add_water(self, water_coords):
         angle = calculate_angle(self.coords, water_coords)
@@ -58,7 +60,7 @@ def calculate_angle(pointA, pointB):
 
     initial_bearing = math.atan2(x, y)
     # Now we have the initial bearing but math.atan2 return values
-    # from -180 to + 180 which is not what we want for a compass bearing
+    # from -180 to +180 which is not what we want for a compass bearing
     # The solution is to normalize the initial bearing as shown below
     initial_bearing = math.degrees(initial_bearing)
     compass_bearing = (initial_bearing + 360) % 360
